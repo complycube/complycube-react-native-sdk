@@ -1,2 +1,3 @@
-export declare function multiply(a: number, b: number): Promise<number>;
+import ComplyCubeRN from './ComplyCubeSDK.js';
+export { ComplyCubeRN };
 //# sourceMappingURL=index.d.ts.map

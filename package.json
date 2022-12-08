@@ -47,8 +47,8 @@
     "url": "https:///issues"
   },
   "homepage": "https://#readme",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "publishConfig":{
+    "registry":"https://complycube.jfrog.io/artifactory/api/npm/complycube-rn-sdk-npm-local/"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.7",
