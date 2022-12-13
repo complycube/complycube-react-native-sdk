@@ -12,6 +12,9 @@ class ComplyCubeSDKPackage : ReactPackage {
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-    return emptyList()
+    System.out.println("createViewManagers");
+    return listOf(
+      ComplyCubeViewManager(reactContext)
+    )
   }
 }

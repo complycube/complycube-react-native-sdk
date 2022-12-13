@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply plugin: 'project-report'
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -256,6 +256,7 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }
@@ -303,6 +304,29 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+apply plugin: 'com.jfrog.artifactory'
+
+repositories {
+
+    artifactory {
+        contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+        resolve {
+            repository {
+                repoKey = 'complycube-mobilesdk-gradle-dev'
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+                maven = true
+
+            }
+        }
+    }
+}
+dependencies {
+    implementation "com.complycube:sdk:0.2.284"
+    implementation 'androidx.core:core-ktx:+'
+    implementation 'androidx.appcompat:appcompat:+'
+}
 
 def isNewArchitectureEnabled() {
     // To opt-in for the New Architecture, you can either:

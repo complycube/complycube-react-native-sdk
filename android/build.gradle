@@ -1,10 +1,12 @@
 buildscript {
   // Buildscript is evaluated before everything else so we can't use getExtOrDefault
   def kotlin_version = rootProject.ext.has('kotlinVersion') ? rootProject.ext.get('kotlinVersion') : project.properties['ComplyCubeSDK_kotlinVersion']
-
+  print "Hello world"
   repositories {
       google()
       mavenCentral()
+      jcenter()
+
   }
 
   dependencies {
@@ -21,8 +23,41 @@ def isNewArchitectureEnabled() {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.jfrog.artifactory'
 
+allprojects {
+  def artifactory_user = "nasreddine.daifallah@complycube.com"
+  def artifactory_password = "AP2PJm12cjFRiMg81gXKfAJKJTJ"
+  def artifactory_contextUrl = "https://complycube.jfrog.io/artifactory"
+  apply plugin: 'com.jfrog.artifactory'
+
+  repositories {
+
+    artifactory {
+      contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+      resolve {
+        repository {
+          repoKey = 'complycube-mobilesdk-gradle-dev'
+          username = "${artifactory_user}"
+          password = "${artifactory_password}"
+          maven = true
+
+        }
+      }
+    }
+  }
+  dependencies {
+    implementation "com.complycube:sdk:0.2.284"
+
+  }
+
+}
+
+task listrepos {
+  doLast {
+    println "Repositories:"
+    project.repositories.each { println "Name: " + it.name + "; url: " + it.url }
+  }
+}
 
 if (isNewArchitectureEnabled()) {
   apply plugin: 'com.facebook.react'
@@ -60,25 +95,12 @@ android {
   }
 
 }
-def artifactory_user = "nasreddine.daifallah@complycube.com"
-def artifactory_password = "AP2PJm12cjFRiMg81gXKfAJKJTJ"
-def artifactory_contextUrl = "https://complycube.jfrog.io/artifactory"
+
 repositories {
   mavenCentral()
   google()
 
-  artifactory {
-    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
-    resolve {
-      repository {
-        repoKey = 'complycube-mobilesdk-gradle-dev'
-        username = "${artifactory_user}"
-        password = "${artifactory_password}"
-        maven = true
 
-      }
-    }
-  }
 
   def found = false
   def defaultDir = null
@@ -150,9 +172,10 @@ def kotlin_version = getExtOrDefault('kotlinVersion')
 
 dependencies {
     //noinspection GradleDynamicVersion
-  implementation "com.complycube:sdk:0.2.286"
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation 'androidx.appcompat:appcompat:1.5.1'
+  implementation 'com.google.android.material:material:1.4.0'
 // From node_modules
 }
 

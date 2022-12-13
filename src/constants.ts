@@ -32,7 +32,7 @@ const schemesColors = [
   'docTypeBorderColor',
   'blueBigType',
   'headerTitle',
-  'linkButtonTextColor',
+  'linkButtonTextColor', // Not android
   'subheaderTitle',
   'textItemType',
   'textSecondary',
