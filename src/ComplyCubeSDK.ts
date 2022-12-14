@@ -1,4 +1,4 @@
-import { NativeModules, NativeEventEmitter, View } from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 import { CCRNError } from './error';
 let { ComplyCubeRNSDK } = NativeModules;
 import {

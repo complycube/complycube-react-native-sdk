@@ -1,9 +1,16 @@
 import React from 'react';
 import ComplyCubeRN  from './ComplyCubeSDK';
-import ComplyCubeAndroid from './ComplyCubeComponentAndroid.tsx';
+import ComplyCubeAndroid from './ComplyCubeComponentAndroid';
 import { Platform, View } from 'react-native';
 
-export default function ComplyCube({ settings, onSuccess, onCancel, onError }) {
+interface CCProps {
+    settings: Object,
+    onSuccess: any, // TODO: Add types
+    onCancel: any,
+    onError: any
+}
+
+export default function ComplyCube({ settings, onSuccess, onCancel, onError }: CCProps) {
     const [isIOS, setIOS] = React.useState(Platform.OS === 'ios');
     // Check device on loading of component
     React.useEffect(() => {
