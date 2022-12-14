@@ -1,3 +1,4 @@
-import ComplyCubeRN from './ComplyCubeSDK.js';
+import ComplyCubeRN from './ComplyCubeSDK';
+import ComplyCube from './ComplyCubeComponent';
 
-export { ComplyCubeRN };
+export { ComplyCubeRN, ComplyCube };

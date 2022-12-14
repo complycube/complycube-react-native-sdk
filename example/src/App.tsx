@@ -1,31 +1,9 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text, Button } from 'react-native';
-import { ComplyCubeRN } from 'complycube-react-native';
-import {
-  requireNativeComponent,
-  UIManager,
-  findNodeHandle,
-} from 'react-native';
-
-let ComplyCubeView = requireNativeComponent('ComplyCubeComponent');
-
-const createFragment = (viewId) =>
-  UIManager.dispatchViewManagerCommand(
-    viewId,
-    // we are calling the 'create' command
-    UIManager.ComplyCubeComponent.Commands.create.toString(),
-    [viewId]
-  );
-
-function SubComply(){
-  return <Text>Hello</Text>
-}
+import { ComplyCubeRN, ComplyCube } from 'complycube-react-native';
 
 export default function App() {
-  const [result] = React.useState<number | undefined>();
-  const [is_rendered, setRendered] = React.useState(false);
-  const ref = React.useRef(null);
   const settings = {
       clientID: '6363c8cc808c610008278c30',
       clientToken:
@@ -46,26 +24,14 @@ export default function App() {
         'faceCapture',
       ],
       scheme: {
-        primaryButtonBgColor: '#FFFFFF',
+        // primaryButtonBgColor: '#FFFFFF',
       },
     }
-  React.useEffect(() => {
-    // console.log(ref);
-    const viewId = findNodeHandle(ref.current);
-    createFragment(viewId);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      
       <Button onPress={async () => await SendCommand()} title="Hello world" />
-      <ComplyCubeView
-        style={{
-          width: 0,
-          height: 0,
-          backgroundColor: "#999999"
-        }}
-        ref={ref}
+      <ComplyCube
         settings={settings}
       />
       
