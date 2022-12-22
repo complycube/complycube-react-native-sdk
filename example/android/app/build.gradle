@@ -313,7 +313,7 @@ repositories {
         contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
         resolve {
             repository {
-                repoKey = 'complycube-mobilesdk-gradle-dev'
+                repoKey = 'complycube-sdk-gradle-release-local'
                 username = "${artifactory_user}"
                 password = "${artifactory_password}"
                 maven = true

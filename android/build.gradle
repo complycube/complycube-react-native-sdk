@@ -25,8 +25,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 allprojects {
-  def artifactory_user = "nasreddine.daifallah@complycube.com"
-  def artifactory_password = "AP2PJm12cjFRiMg81gXKfAJKJTJ"
+  def artifactory_user = System.getenv('COMPLYCUBE_USER')
+  def artifactory_password = System.getenv('COMPLYCUBE_PASS')
   def artifactory_contextUrl = "https://complycube.jfrog.io/artifactory"
   apply plugin: 'com.jfrog.artifactory'
 
@@ -36,7 +36,7 @@ allprojects {
       contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
       resolve {
         repository {
-          repoKey = 'complycube-mobilesdk-gradle-dev'
+          repoKey = 'complycube-sdk-gradle-release-local'
           username = "${artifactory_user}"
           password = "${artifactory_password}"
           maven = true
