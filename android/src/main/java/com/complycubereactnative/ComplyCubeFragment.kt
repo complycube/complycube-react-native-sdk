@@ -31,7 +31,7 @@ class MyFragment(settings: ReadableMap, emitter: DeviceEventManagerModule.RCTDev
         }
         // Prepare stages
 
-        builder.withStages(s.stages[0], *s.stages)
+        builder.withStages(s.stages[0], *s.stages.drop(1).toTypedArray())
         ccLog("Stages: ${s.countries.size}")
         builder.withCountries(s.countries[0], *s.countries.drop(1).toTypedArray())
         if(s.colorScheme != null){
