@@ -1,8 +1,4 @@
-
-# Repository YAML [higher on hierarchy]
-codecov:
-  token: "268f96af-c6bf-4c3e-9334-2605d3f30f1d"  # Your private repository token
 coverage:
-  precision: 2  # 2 = xx.xx%, 0 = xx%
-  round: down # default down
-  range: 80...100 # default 70...90. red...green
+  precision: 2
+  round: down 
+  range: 80...100
