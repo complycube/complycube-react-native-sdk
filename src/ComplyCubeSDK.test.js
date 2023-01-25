@@ -1,10 +1,9 @@
 import ComplyCubeRN from './ComplyCubeSDK';
-import ComplyCubeRNSDK from '../components/ccrnView';
 import React from 'react';
-import renderer from 'react-test-renderer';
 
-jest.useFakeTimers();
+// jest.useFakeTimers();
 
+console.log('____________');
 const testCase = {
   clientID: '6363c8cc808c610008278c30',
   clientToken:
