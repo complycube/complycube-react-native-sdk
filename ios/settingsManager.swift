@@ -106,8 +106,46 @@ class StagesHandler: NSObject {
                 }
               }
               builder.setAllowedDocumentTypes(types: documents)
+              // ML settings
+                if(y["useMLAssistance"] != nil){
+                    if(forceJSONBoolean(y["useMLAssistance"])){
+                        builder.setEnableMLAssistant(enable: true)
+                    }else{
+                        builder.setEnableMLAssistant(enable: false)
+                    }
+                }
+              // Guidance
+                if(y["showGuidance"] != nil){
+                    if(forceJSONBoolean(y["showGuidance"])){
+                        builder.setShowGuidance(enable: true)
+                    }else{
+                        builder.setShowGuidance(enable: false)
+                    }
+                }
+              // retry limits
+                if(y["retryLimit"] != nil){
+                    let retries: Int = forceJSONInt(y["retryLimit"])
+                    builder.setRetryLimit(count: retries)
+                }
+              
+              // use nlive capture
+                if(y["liveCapture"] != nil){
+                    if(forceJSONBoolean(y["liveCapture"])){
+                        print("----------------------- with live capture")
+                        builder.useLiveCaptureOnly(enable: true)
+                    }else {
+                        print("----------------------- without live capture")
+                        builder.useLiveCaptureOnly(enable: false)
+                    }
+                }
+                // Title
+                  if(y["title"] != nil){
+                      builder.setTitle(title: y["title"] as! String)
+                  }
+              
             }}
-          
+            
+            
           return builder.build()
         case "faceCapture":
           let builder = BiometricStageBuilder()
@@ -115,10 +153,69 @@ class StagesHandler: NSObject {
             let mode = y["mode"] as! String
             builder.setType(type: (mode == "photo" ? BiometricType.photo : BiometricType.video))
           }
+            // ML settings
+              if(y["useMLAssistance"] != nil){
+                  if(forceJSONBoolean(y["useMLAssistance"])){
+                      builder.setEnableMLAssistant(enable: true)
+                  }else{
+                      builder.setEnableMLAssistant(enable: false)
+                  }
+              }
+            // Guidance
+              if(y["showGuidance"] != nil){
+                  if(forceJSONBoolean(y["showGuidance"])){
+                      builder.setShowGuidance(enable: true)
+                  }else{
+                      builder.setShowGuidance(enable: false)
+                  }
+              }
+            // retry limits
+              if(y["retryLimit"] != nil){
+                  let retries: Int = forceJSONInt(y["retryLimit"])
+                  builder.setRetryLimit(count: retries)
+              }
+            
+            // use nlive capture
+              if(y["liveCapture"] != nil){
+                  if(forceJSONBoolean(y["liveCapture"])){
+                      builder.useLiveCaptureOnly(enable: true)
+                  }else {
+                      builder.useLiveCaptureOnly(enable: false)
+                  }
+              }
           return builder
         case "poaCapture":
           let builder = AddressStageBuilder()
-          
+            // ML settings
+              if(y["useMLAssistance"] != nil){
+                  if(forceJSONBoolean(y["useMLAssistance"])){
+                      builder.setEnableMLAssistant(enable: true)
+                  }else{
+                      builder.setEnableMLAssistant(enable: false)
+                  }
+              }
+            // Guidance
+              if(y["showGuidance"] != nil){
+                  if(forceJSONBoolean(y["showGuidance"])){
+                      builder.setShowGuidance(enable: true)
+                  }else{
+                      builder.setShowGuidance(enable: false)
+                  }
+              }
+            // retry limits
+              if(y["retryLimit"] != nil){
+                  let retries: Int = forceJSONInt(y["retryLimit"])
+                  builder.setRetryLimit(count: retries)
+              }
+            
+            // use nlive capture
+              if(y["liveCapture"] != nil){
+                  if(forceJSONBoolean(y["liveCapture"])){
+                      builder.useLiveCaptureOnly(enable: true)
+                  }else {
+                      builder.useLiveCaptureOnly(enable: false)
+                  }
+              }
           return builder.build()
         default:
           return ""
@@ -138,5 +235,22 @@ class StagesHandler: NSObject {
     }
     return results
   }
-  
+    public static func forceJSONBoolean(_ input: Any?) -> Bool{
+        if(input is Bool){
+            return input as! Bool
+        }
+        if(input is String){
+            return input as! String == "true"
+        }
+        return false
+    }
+    public static func forceJSONInt(_ input: Any?) -> Int {
+        if(input is String){
+            return Int(input as! String) ?? 0
+        }
+        if(input is Int){
+            return input as! Int
+        }
+        return 0
+    }
 }

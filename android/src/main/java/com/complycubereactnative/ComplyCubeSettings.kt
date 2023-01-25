@@ -62,6 +62,16 @@ class ComplyCubeSettings {
         var ccStage: Stage? = null
         val stageName: String = stage.getString("name") ?: ""
         // Check if the stages for more information
+        val useMLAssistance = if ( stage.hasKey("useMLAssistance") ) stage.getBoolean("useMLAssistance") as Boolean ?: false else false
+        val showGuidance = if( stage.hasKey("showGuidance") ) stage.getBoolean("showGuidance") as Boolean ?: false else false
+        val retryLimit = if( stage.hasKey("retryLimit") ) stage.getInt("retryLimit") as Int ?: 0 else 0
+        val liveCapture = if(stage.hasKey("liveCapture")) stage.getBoolean("liveCapture") as Boolean ?: false else false
+        val title = if(stage.hasKey("title")) stage.getString("title") as String ?: "" else ""
+        ccLog("useMLAssistace ${useMLAssistance}")
+        ccLog("showGuidance ${showGuidance}")
+        ccLog("retryLimit ${retryLimit}")
+        ccLog("liveCapture ${liveCapture}")
+
         when (stageName){
             "intro" -> {
                 // Get the other properties
@@ -136,17 +146,34 @@ class ComplyCubeSettings {
                         }
                     }
                 }
-                ccStage = Stage.CustomStage.Document(ccDocumentTypes[0], *ccDocumentTypes.drop(0).toTypedArray())
+                // get other properties for the document capture
+                // useMLAssistance, showGuidance, retryLimit, liveCapture, title
+                ccStage = Stage.CustomStage.Document(ccDocumentTypes[0],
+                    *ccDocumentTypes.drop(0).toTypedArray(),
+                    isMLAssistantEnabled = useMLAssistance,
+                    isGuidanceEnabled = showGuidance,
+                    retryLimit = retryLimit
+                )
             }
             "faceCapture" -> {
                 // Get the mode property
                 val mode: String = stage.getString("mode") ?: ""
                 when (mode){
                     "video" -> {
-                        ccStage = Stage.CustomStage.SelfieVideo()
+                        ccStage = Stage.CustomStage.SelfieVideo(
+                            isMLAssistantEnabled = useMLAssistance,
+                            isGuidanceEnabled = showGuidance,
+                            retryLimit = retryLimit,
+                            useLiveCaptureOnly = liveCapture,
+                        )
                     }
                     "photo" -> {
-                        ccStage = Stage.CustomStage.SelfiePhoto()
+                        ccStage = Stage.CustomStage.SelfiePhoto(
+                            isMLAssistantEnabled = useMLAssistance,
+                            isGuidanceEnabled = showGuidance,
+                            retryLimit = retryLimit,
+                            useLiveCaptureOnly = liveCapture,
+                        )
                     }
                     else -> {
                         // Fire an error

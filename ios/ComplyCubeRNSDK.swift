@@ -30,13 +30,15 @@ class ComplyCubeRNSDK: RCTEventEmitter{
     DispatchQueue.main.async {
       let sm = SettingManager(request: settings as! [AnyHashable: Any])
 
-      ComplyCubeMobileSDK.FlowBuilder()
-              .withSDKToken(sm.token)
+      var m = ComplyCubeMobileSDK.FlowBuilder()
+        
+              m.withSDKToken(sm.token)
               .withClientId(sm.clientID)
               .withCallbackHandler(self)
               .withStages(sm.stages as! [ComplyCubeMobileSDKStage])
               .withColorScheme(sm.scheme)
-              .start(fromVc: (UIApplication.shared.windows.first?.rootViewController?.findTopMostController())!)
+      print("We're here")
+              m.start(fromVc: (UIApplication.shared.windows.first?.rootViewController?.findTopMostController())!)
     }
   }
   private func _errorToJson(_ error: ComplyCubeError) -> [AnyHashable: Any]{
