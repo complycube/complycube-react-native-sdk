@@ -1,0 +1,39 @@
+# Publish to npm jFrog Artifactory if passes 80% code coverage in codecov
+name: npm jFrog Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm test
+      - name: Preparing for the publising
+        run: |
+          touch ~/.npmrc
+          echo "_auth = ${{ secrets.JFROG_PASS }}" >> ~/.npmrc
+          echo "email = ${{ secrets.JFROG_MAIL }}" >> ~/.npmrc
+          echo "always-auth = true" >> ~/.npmrc
+          echo "registry = ${{ secrets.JFROG_REGISTRY }}" >> ~/.npmrc
+          echo "Config preparation Done"
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          fail_ci_if_undetected: true
+      - name: Publish to jFrog Artifactory
+        id: publish
+        run: |
+          npm publish
+      - name: Post-publishing
+        run: |
+          rm ~/.npmrc
+          echo "Config removed"
