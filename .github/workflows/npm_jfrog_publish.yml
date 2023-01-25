@@ -24,11 +24,11 @@ jobs:
           echo "always-auth = true" >> ~/.npmrc
           echo "registry = ${{ secrets.JFROG_REGISTRY }}" >> ~/.npmrc
           echo "Config preparation Done"
-      - uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: true
-          fail_ci_if_undetected: true
+      - name: Code coverage
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${{ secrets.CODECOV_TOKEN }} -f codeconv.yml
       - name: Publish to jFrog Artifactory
         id: publish
         run: |
