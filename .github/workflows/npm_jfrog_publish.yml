@@ -1,10 +1,10 @@
 # Publish to npm jFrog Artifactory if passes 80% code coverage in codecov
 name: npm jFrog Publish
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
+  # push:
+  #   branches:
+  #     - master
 
 jobs:
   build:
