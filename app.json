@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "green-bank-rn",
+    "slug": "green-bank-rn",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "green-bank-rn"
+}
