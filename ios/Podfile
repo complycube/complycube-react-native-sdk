@@ -3,7 +3,7 @@ require File.join(File.dirname(`node --print "require.resolve('react-native/pack
 require File.join(File.dirname(`node --print "require.resolve('@react-native-community/cli-platform-ios/package.json')"`), "native_modules")
 
 plugin 'cocoapods-art', :sources => [
-  'complycube-sdk-cocoapods-local',
+  'cc-cocoapods-dev-local',
   'trunk'
 ]
 
