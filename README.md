@@ -112,7 +112,7 @@ gem install cocoapods-art
 2. To add the library, copy your repository credentials into a `.netrc` file to your home directory and setup the repository:
 
 ```bash
-pod repo-art add cc-cocoapods-local "https://complycuberepo.jfrog.io/artifactory/api/pods/cc-cocoapods-local"
+pod repo-art add cc-cocoapods-local "https://complycuberepo.jfrog.io/artifactory/api/pods/cc-cocoapods-release-local"
 ```
 
 3. Add plugin repos and install the pod using your `ios/Podfile`.
@@ -121,13 +121,6 @@ pod repo-art add cc-cocoapods-local "https://complycuberepo.jfrog.io/artifactory
 plugin 'cocoapods-art', :sources => [
   'cc-cocoapods-release-local'
 ]
-...
-
-target 'YourApp' do
-    ...
-	pod 'ComplyCube'
-    ...
-end
 ```
 
 **Application permissions**
@@ -307,12 +300,15 @@ const settings = {
 ## 5. Component setup
 
 Now you can use the ComplyCube component on your screen
-
+```jsx
+import { ComplyCube } from '@complycube/react-native';
+...
 return (
     <View style={styles.container}>
       <ComplyCube settings={settings} />
     </View>
   );
+```
 
 ## 6. Perform checks
 
