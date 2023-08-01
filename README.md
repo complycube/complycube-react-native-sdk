@@ -115,7 +115,7 @@ gem install cocoapods-art
 pod repo-art add cc-cocoapods-local "https://complycuberepo.jfrog.io/artifactory/api/pods/cc-cocoapods-release-local"
 ```
 
-3. Add plugin repos and install the pod using your `ios/Podfile`.
+3. Add plugin repos by adding the snippet below to the top of your `ios/PodFile` and install the pod using the `pod install` command.
 
 ```ruby
 plugin 'cocoapods-art', :sources => [
