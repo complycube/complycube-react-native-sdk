@@ -118,10 +118,23 @@ pod repo-art add cc-cocoapods-local "https://complycuberepo.jfrog.io/artifactory
 3. Add plugin repos by adding the snippet below to the top of your `ios/PodFile` and install the pod using the `pod install` command.
 
 ```ruby
+...
+platform :ios, '12.1' # Set the platform version to 12.1 or higher
+...
 plugin 'cocoapods-art', :sources => [
   'cc-cocoapods-release-local'
 ]
+source 'https://cdn.cocoapods.org/'
+...
+
+target 'YourAppTarget' do
+    ...
+    use_frameworks!
+    ...
+end
 ```
+
+
 
 **Application permissions**
 
