@@ -130,6 +130,7 @@ source 'https://cdn.cocoapods.org/'
 target 'YourAppTarget' do
     ...
     use_frameworks!
+    use_modular_headers!
     ...
 end
 ```
