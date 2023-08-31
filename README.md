@@ -36,11 +36,9 @@
     - [Selfie photo and video stage](#selfie-photo-and-video-stage)
     - [Proof of address stage](#proof-of-address-stage)
   - [Appearance](#appearance)
-  - [| linkButtonTextColor            | Links color                                     |](#-linkbuttontextcolor-------------links-color-------------------------------------)
 - [5. Localization](#5-localization)
 - [6. Result handling](#6-result-handling)
 - [7. Error handling](#7-error-handling)
-  - [| 3          | An unexpected error has occurred. If this keeps occurring, let us know about it.               |](#-3-----------an-unexpected-error-has-occurred-if-this-keeps-occurring-let-us-know-about-it---------------)
 - [8. Going live](#8-going-live)
 - [Additional info](#additional-info)
 
