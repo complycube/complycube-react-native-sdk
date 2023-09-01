@@ -1,7 +1,4 @@
-# ComplyCube React native SDK
-
- ![ComplyCube](statics/complycube_loves_rn.png)
-
+# ComplyCube React Native SDK
 
 > :information_source: Please get in touch with your **Account Manger** or **[support](https://support.complycube.com/hc/en-gb/requests/new)** to get access to our Mobile SDK.
 
