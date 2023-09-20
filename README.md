@@ -121,7 +121,8 @@ npm i -s @complycube/react-native
      'trunk'
    ]
    ...
-
+   platform :ios, '13.0' # Or above
+   
    target 'YourApp' do
        ...
        pod 'ComplyCube'
@@ -159,7 +160,7 @@ artifactory_password= "ENCRYPTED PASS"
 artifactory_contextUrl= https://complycuberepo.jfrog.io/artifactory
 ```
 
-Then update your application `build.gradle` file with the ComplyCube SDK repository maven settings and SDK dependency:
+Then update your application `android/build.gradle` file with the ComplyCube SDK repository maven settings and SDK dependency:
 
 ```gradle
 buildscript {
@@ -170,7 +171,7 @@ buildscript {
             contextUrl = "${artifactory_contextUrl}"  
             resolve {
                 repository {
-                    repoKey = 'complycube-sdk-gradle-release-local'
+                    repoKey = 'cc-gradle-release-local'
                     username = "${artifactory_user}"
                     password = "${artifactory_password}"
                     maven = true
@@ -286,7 +287,7 @@ const stages = [
 
 ### 5. Initialize an SDK flow
 
-You can now initialize the `settings` object by setting the SDK token, client ID, and the stages of the flow.
+Initialize the `settings` object by setting the SDK token, client ID, and the stages of the flow.
 
 ```javascript
 const settings = {
