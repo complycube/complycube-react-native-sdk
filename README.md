@@ -520,7 +520,7 @@ const settings = {
 | headerTitle                    | Title heading text color.                        |
 | subheaderTitle                 | Subheading text color.                           |
 | linkButtonTextColor            | Links color.                                     |
-| uiInterfaceStyle               | Set the SDK to use dark mode (`.dark`),  light mode (`.light`), or system inherited (`.inherited`).                     |
+| uiInterfaceStyle               | Set the SDK to use dark mode (`dark`),  light mode (`light`), or system inherited (`inherited`).                     |
 ------------------------------------------------------------------------------------
 
 ### Localization
@@ -690,11 +690,13 @@ const settings = {
 
 ## NFC capture
 
+- [iOS requirements](https://github.com/complycube/complycube-ios-sdk#pre-requisites)
+
 With the ComplyCube SDK, you can read NFC-enabled identity documents and confirm their authenticity and identity.
 
 To perform an NFC read, you'll first have to scan the document to obtain the necessary key for accessing the chip.
 
-> :information_source: Please get in touch with your **Account Manger** or **[support](https://support.complycube.com/hc/en-gb/requests/new)** to get access to our NFC Enabled Mobile SDK.
+> :information_source: Please get in touch with your **Account Manager** or **[support](https://support.complycube.com/hc/en-gb/requests/new)** to get access to our NFC Enabled Mobile SDK.
 
 The SDK supports the following features
 
