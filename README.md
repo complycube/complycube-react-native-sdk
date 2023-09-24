@@ -124,8 +124,10 @@ npm i -s @complycube/react-native
    platform :ios, '13.0' # Or above
    
    target 'YourApp' do
+       use_frameworks!
+       use_modular_headers!
        ...
-       pod 'ComplyCube'
+       pod 'ComplyCubeMobileSDK'
        ...
    end
    ```
