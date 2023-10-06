@@ -1,6 +1,6 @@
 {
   "name": "green-bank-rn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",
@@ -9,21 +9,21 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-navigation/native": "^6.1.1",
-    "axios": "^1.2.1",
-    "complycube-react-native": "^0.1.3",
-    "expo": "^47.0.0",
-    "expo-constants": "^14.0.2",
-    "expo-splash-screen": "~0.17.5",
-    "expo-status-bar": "~1.4.2",
-    "react": "18.1.0",
-    "react-native": "0.70.5",
-    "react-native-gesture-handler": "^2.8.0",
-    "react-native-vector-icons": "^9.2.0",
-    "react-navigation": "^4.4.4"
+    "@react-navigation/native": "^6.1.8",
+    "axios": "^1.5.1",
+    "@complycube/react-native": "^0.2.6",
+    "expo": "^49.0.13",
+    "expo-constants": "^14.4.2",
+    "expo-splash-screen": "~0.22.0",
+    "expo-status-bar": "~1.7.1",
+    "react": "18.2.0",
+    "react-native": "0.72.5",
+    "react-native-gesture-handler": "^2.13.1",
+    "react-native-vector-icons": "^10.0.0",
+    "react-navigation": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.23.0"
   },
   "private": true
 }

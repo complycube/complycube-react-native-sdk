@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { ComplyCube } from 'complycube-react-native';
+import { StyleSheet, View } from 'react-native';
+import { ComplyCube } from '@complycube/react-native';
 
 
 
@@ -37,7 +37,7 @@ export default function App() {
     //   "livePhotoId": ["63a432a2c448150008641ec7"]
     // }
     
-    navigate("PendingScreen")
+    // navigate("PendingScreen")
   }
   
   const onError = (error) => {
@@ -46,12 +46,12 @@ export default function App() {
     //   "description": "TOKEN_EXPIRED", 
     //   "errorCode": null, 
     //   "message": "TOKEN_EXPIRED"}]
-    navigate("PendingScreen")
+    // navigate("PendingScreen")
   }
   
   const onCanceled = (error) => {
     console.log('Canceled', error);
-    navigate("PendingScreen")
+    // navigate("PendingScreen")
   }
   return (
     <View style={styles.container}>
