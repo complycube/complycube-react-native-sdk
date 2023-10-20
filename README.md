@@ -84,13 +84,14 @@ Configure the npm registry to use the ComplyCube SDK repository by running the f
 npm config set registry https://complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/
 ```
 
-Next, modify the `.npmrc` file in your home directory. For Windows users, this file can be found at `C:\Users\{username}\.npmrc`. For users of Unix-based systems, the file is located in `~/.npmrc`. Add the following lines to the file:
+Next, modify the `.npmrc` file in your home directory. For Windows users, this file can be found at `C:\Users\{username}\.npmrc`. For users of Unix-based systems, the file is located in `~/.npmrc`. Add settings copied from jFrog to the file, you can see the tutorial [here](https://ior.ad/9wn7?iframeHash=watchsteps-1):
 
 ```bash
-_auth = <TOKEN>
-email = <USER_EMAIL>
-always-auth = true
-registry=https://complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/
+@complycube:registry=https://complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/
+//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:_password=<PASSWORD>
+//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:username=<EMAIL>
+//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:email=<EMAIL>
+//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:always-auth=true
 ```
 
 Finally, install the React Native library by running:
