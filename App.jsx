@@ -17,14 +17,14 @@ const settings = {
   stages: [
     {
       name: 'intro',
-      heading: 'Am from Java script',
-      message: 'A message for our users',
+      heading: 'Custom Screen Title',
+      message: 'Custom welcome message.',
     },
     {
       name: 'documentCapture',
       documentTypes: {
         passport: true,
-        driving_license: ['GB', 'FR', 'DZ'],
+        driving_license: ['GB', 'US'],
       },
     },
     'faceCapture',
