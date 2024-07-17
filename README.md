@@ -6,21 +6,6 @@ This repository provides a pre-built UI that uses the ComplyCube SDK. It guides 
 
 ## To run the app
 
-### Update your .npmrc file
-
-1. Modify the `.npmrc` file in your home directory by adding the settings below:
-
-> :information_source: For users of **Unix-based** systems, the file is located at `~/.npmrc`.
-For **Windows** users, this file can be found at `C:\Users\{username}\.npmrc`.
-
-```bash
-@complycube:registry=https://complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/
-//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:_password=JFROG_ENCRYPTED_PASSWORD
-//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:username=JFROG_USERNAME
-//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:email=JFROG_USERNAME
-//complycuberepo.jfrog.io/artifactory/api/npm/cc-react-native-npm-local/:always-auth=true
-```
-
 ### Install CocoaPods
 
 1. Before using the ComplyCube SDK, install the CocoaPods Artifactory plugin by running the following command in your terminal:
