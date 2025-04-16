@@ -1,4 +1,4 @@
-package com.checkrn
+package com.test2
 
 import android.app.Application
 import com.facebook.react.PackageList
