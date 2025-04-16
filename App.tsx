@@ -12,8 +12,8 @@ import {
 } from 'react-native';
 
 const settings = {
-  clientID: '67ffc0157567510008e7f71c',
-  clientToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiTTJGa056VTNZamMzWTJKa1lqVTBZelUzTVRFd1pEZzVOV1UxTkdNNE0yWXlaVEZsWXpVMk1XWXhNalkwWWpFek1tTmlOalU0TlRnMU5HRXhOVGs0WWpJMk5qbGxNelkxTURabE5XSTVOVEl6WWpSbFl6VTBaR1ZtTmpjeU9UaGlNV1UzWmpZeFlqQXhZakk0WWpZM1lUVTVPREJqTWpBM09UazBPREF3WldZeU1HRTJaV1ppWWpjM05ERTNOR0l4TUdFeE1ETmxPVGMwTUdNNU9ETmpOemhqTXpabVkySXdZV1EwTnpJM1lqSmpOekUyTlRKaE5Ea3hZakUxTTJGaE5XSm1ZamRrWVRnd09XWXhOV1poTWpkbU9XSXlZV0V5WVRKbE5qSXpOelE9IiwidXJscyI6eyJhcGkiOiJodHRwczovL2FwaS5jb21wbHljdWJlLmNvbSIsInN5bmMiOiJ3c3M6Ly94ZHMuY29tcGx5Y3ViZS5jb20iLCJjcm9zc0RldmljZSI6Imh0dHBzOi8veGQuY29tcGx5Y3ViZS5jb20ifSwib3B0aW9ucyI6eyJoaWRlQ29tcGx5Q3ViZUxvZ28iOmZhbHNlLCJlbmFibGVDdXN0b21Mb2dvIjp0cnVlLCJlbmFibGVUZXh0QnJhbmQiOnRydWUsImVuYWJsZUN1c3RvbUNhbGxiYWNrcyI6dHJ1ZSwiZW5hYmxlTmZjIjp0cnVlLCJpZGVudGl0eUNoZWNrTGl2ZW5lc3NBdHRlbXB0cyI6NSwiZG9jdW1lbnRJbmZsaWdodFRlc3RBdHRlbXB0cyI6MiwibmZjUmVhZEF0dGVtcHRzIjo1LCJlbmFibGVBZGRyZXNzQXV0b2NvbXBsZXRlIjp0cnVlLCJlbmFibGVXaGl0ZUxhYmVsaW5nIjpmYWxzZX0sImlhdCI6MTc0NDgxNDEwNywiZXhwIjoxNzQ0ODE3NzA3fQ.4AnkANFFxrVk8-mnyk_G8KyyrU3WI4BVWpQfLTx9AnM', // Replace with a valid token
+  clientID: 'CLIENT_ID',
+  clientToken: 'SDK_TOKEN',
   stages: [
     {
       name: 'intro',
@@ -27,6 +27,7 @@ const settings = {
         driving_license: ['GB', 'US'],
       },
     },
+    'faceCapture',
   ],
 };
 

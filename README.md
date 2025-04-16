@@ -6,20 +6,27 @@ This repository provides a pre-built UI that uses the ComplyCube SDK. It guides 
 
 ## To run the app
 
-### Install CocoaPods
+### Before you start
 
-1. Before using the ComplyCube SDK, install the CocoaPods Artifactory plugin by running the following command in your terminal:
+1. Install [Node.js](https://nodejs.org/en/download/).
+2. Install [Android Studio](https://developer.android.com/studio) and [Xcode](https://developer.apple.com/xcode/).
+3. Clone this repository.
 
-   ```bash
-   gem install cocoapods-art
-   ```
+```bash
+git clone https://github.com/complycube/complycube-react-native-sdk.git
+```
 
-2. To add the library, copy your repository credentials into a `.netrc` file to your home directory and setup the repository:
+4. Install dependencies.
 
-   ```bash
-   pod repo-art add cc-cocoapods-release-local "https://complycuberepo.jfrog.io/artifactory/api/pods/cc-cocoapods-release-local"
-   ```
+```bash
+cd complycube-react-native-sdk
+npm install
+```
 
+>#### iOS only
+>Install CocoaPods dependencies. <br/>
+>- `cd ios` <br/>
+>- `pod install`
 
 ### Run the apps
 
