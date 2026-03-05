@@ -18,17 +18,67 @@ const sdkSettings: Record<string, unknown> = {
   stages: [
     {
       name: 'intro',
-      heading: 'Custom Screen Title',
-      message: 'Custom welcome message.',
+      title: 'Welcome',
+      message: 'We will verify your identity.',
+    },
+    {
+      name: 'consent',
+      title: 'Terms of Service',
+      message: 'Accept terms',
     },
     {
       name: 'documentCapture',
+      nfcEnabled: true,
+      captureDocumentId: false,
+      showGuidance: true,
+      useLiveCaptureOnly: false,
+      useMLAssistance: true,
+      retryLimit: 3,
       documentTypes: {
         passport: true,
-        driving_license: ['GB', 'US'],
+        driving_license: ['GB', 'FR'],
+        national_identity_card: ['GB', 'FR'],
+        residence_permit: ['GB', 'FR'],
       },
     },
-    'faceCapture',
+    {
+      name: 'faceCapture',
+      mode: 'photo',
+      showGuidance: true,
+      useLiveCaptureOnly: false,
+      useMLAssistance: true,
+      retryLimit: 1,
+    },
+    // {
+    //   name: 'faceCapture',
+    //   mode: 'video',
+    //   showGuidance: true,
+    //   useLiveCaptureOnly: false,
+    //   useMLAssistance: true,
+    //   retryLimit: 1,
+    // },
+    {
+      name: 'poaCapture',
+      showGuidance: true,
+      useLiveCaptureOnly: false,
+      useMLAssistance: true,
+      retryLimit: 3,
+      isAddressCaptureEnabled: true,
+      documentTypes: {
+        bank_statement: true,
+        utility_bill: ['GB', 'FR'],
+      },
+    },
+    {
+      name: 'addressCapture',
+      allowedCountries: ['GB', 'FR'],
+      useAutoComplete: true,
+    },
+    {
+      name: 'complete',
+      title: 'Complete',
+      message: 'Verification finished.',
+    },
   ],
 };
 
