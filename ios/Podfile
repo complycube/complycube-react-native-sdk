@@ -1,4 +1,6 @@
 # Resolve react_native_pods.rb with node to allow for hoisting
+project 'CheckRN.xcodeproj'  # or whatever your project name is
+
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
     "react-native/scripts/react_native_pods.rb",

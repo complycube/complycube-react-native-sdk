@@ -105,6 +105,32 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    lint {
+          baseline = file("lint-baseline.xml")
+      }
+          packaging {
+        resources {
+            // Pick first occurrence of duplicate files
+            pickFirst '**/META-INF/io.netty.versions.properties'
+            
+            // Alternative: exclude all instances if you don't need them
+            // excludes += '**/META-INF/io.netty.versions.properties'
+            
+            // You might also need these for other common conflicts:
+            pickFirst '**/META-INF/INDEX.LIST'
+            pickFirst '**/META-INF/DEPENDENCIES'
+            pickFirst '**/META-INF/LICENSE'
+            pickFirst '**/META-INF/LICENSE.txt'
+            pickFirst '**/META-INF/NOTICE'
+            pickFirst '**/META-INF/NOTICE.txt'
+            pickFirst '**/META-INF/ASL2.0'
+            pickFirst '**/META-INF/LGPL2.1'
+            
+            // For Netty specifically
+            pickFirst '**/META-INF/native-image/**'
+            pickFirst '**/META-INF/native/**'
+        }
+    }
 }
 
 dependencies {
