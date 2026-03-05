@@ -1,59 +1,194 @@
-# ComplyCube Example App
+# ComplyCube React Native SDK Example
 
-This repository provides a pre-built UI that uses the ComplyCube SDK. It guides you through the ComplyCube identity verification process, which includes collecting client ID documents, proof of address documents, and biometric selfies.
+This repository is a runnable React Native app that demonstrates how to launch the ComplyCube mobile flow using `@complycube/react-native`.
 
-> :information_source: Please get in touch with your **Account Manager** or **[support](https://support.complycube.com/hc/en-gb/requests/new)** to get access to our Mobile SDK.
+It is intended for developers who want a working reference for:
 
-## To run the app
+- Setting up credentials (`clientID`, `clientToken`)
+- Starting the SDK with `ComplyCube.startSafe(...)`
+- Handling success, cancel, and error outcomes
+- Troubleshooting common launch issues
 
-### Before you start
+For access to the Mobile SDK, contact your Account Manager or [ComplyCube Support](https://support.complycube.com/hc/en-gb/requests/new).
 
-1. Install [Node.js](https://nodejs.org/en/download/).
-2. Install [Android Studio](https://developer.android.com/studio) and [Xcode](https://developer.apple.com/xcode/).
-3. Clone this repository.
+## Prerequisites
+
+- Node.js 18+
+- React Native development environment (Android Studio and/or Xcode)
+- CocoaPods (for iOS)
+
+## Quick Start
+
+1. Clone and install dependencies:
 
 ```bash
 git clone https://github.com/complycube/complycube-react-native-sdk.git
-```
-
-4. Install dependencies.
-
-```bash
 cd complycube-react-native-sdk
 npm install
 ```
 
->#### iOS only
->Install CocoaPods dependencies. <br/>
->- `cd ios` <br/>
->- `pod install`
+2. Install iOS pods (iOS only):
 
-### Run the apps
+```bash
+cd ios
+pod install
+cd ..
+```
 
-1. [Create a Client ID](https://docs.complycube.com/documentation/guides/mobile-sdk-guide/mobile-sdk-integration-guide#id-2.-create-a-client).
-2. [Generate an SDK token](https://docs.complycube.com/documentation/guides/mobile-sdk-guide/mobile-sdk-integration-guide#id-3.-generate-an-sdk-token).
-3. In the `App.jsx` file, replace `CLIENT_ID` and `SDK_TOKEN` with the generated values from the previous steps.
-4. Run the Android app:
+3. Start Metro:
 
-   ```bash
-   npm run android
-   ```
+```bash
+npm start
+```
 
-5. Run the iOS app:
+4. Run the app:
 
-   ```bash
-   npm run ios
-   ```
+```bash
+# Android
+npm run android
 
-## Integrating our SDK
+# iOS
+npm run ios
+```
+
+## Configure Credentials
+
+In [`App.tsx`](./App.tsx), replace placeholders with real values:
+
+```ts
+const id = 'CLIENT_ID';
+const token = 'SDK_TOKEN';
+```
+
+You can generate these from:
+
+- [Create a Client](https://docs.complycube.com/documentation/guides/mobile-sdk-guide/mobile-sdk-integration-guide#id-2.-create-a-client)
+- [Generate an SDK Token](https://docs.complycube.com/documentation/guides/mobile-sdk-guide/mobile-sdk-integration-guide#id-3.-generate-an-sdk-token)
+
+## SDK Launch Pattern Used in This Repo
+
+This project launches the SDK with `startSafe`:
+
+```ts
+const out = await ComplyCube.startSafe({
+  stages: [],
+  ...sdkSettings,
+  clientID: id,
+  clientToken: token,
+});
+```
+
+Important:
+
+- `sdkSettings` must provide either:
+  - a non-empty `stages` array, or
+  - a `workflowTemplateId`
+- If neither is provided, the SDK will not start.
+
+### Example `sdkSettings`
+
+```ts
+const sdkSettings = {
+  stages: [
+    {
+      name: 'intro',
+      heading: 'Custom Screen Title',
+      message: 'Custom welcome message.',
+    },
+    {
+      name: 'documentCapture',
+      documentTypes: {
+        passport: true,
+        driving_license: ['GB', 'US'],
+      },
+    },
+    'faceCapture',
+  ],
+};
+```
+
+## Handle Outcomes Correctly
+
+`startSafe` returns one of three statuses:
+
+- `success`
+- `cancelled`
+- `error`
+
+Recommended handling:
+
+```ts
+const out = await ComplyCube.startSafe(options);
+
+switch (out.status) {
+  case 'success':
+    console.log('Verification completed:', out.result);
+    break;
+  case 'cancelled':
+    console.log('User cancelled:', out.message);
+    break;
+  case 'error':
+    console.error('SDK error:', out.message, out.details);
+    break;
+}
+```
+
+## Telemetry / Event Subscription
+
+You can listen to SDK events:
+
+```ts
+import { subscribe } from '@complycube/react-native';
+
+const unsubscribe = subscribe((message) => {
+  console.log('ComplyCube event:', message);
+});
+
+// cleanup when done
+unsubscribe();
+```
+
+## iOS Notes
+
+The SDK uses camera and microphone capture flows. Ensure these keys exist in your app `Info.plist`:
+
+- `NSCameraUsageDescription`
+- `NSMicrophoneUsageDescription`
+
+Example values:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>Used to capture facial biometrics and documents</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Used to capture video biometrics</string>
+```
+
+## Troubleshooting
+
+### SDK does not start
+
+- Confirm `id` and `token` are real values, not placeholders.
+- Ensure `sdkSettings` includes valid `stages` or `workflowTemplateId`.
+- Check Metro logs for `ComplyCube outcome` and inspect `status` + `message`.
+
+### iOS build issues
+
+- Reinstall pods:
+
+```bash
+cd ios
+pod install
+cd ..
+```
 
 For detailed instructions on integrating our SDK, please refer to our [integration guide](ttps://docs.complycube.com/sdks/mobile-integrations/react-native-sdk).
 
-For an overview of our core platform and its multiple features, please refer to our [user guide](https://docs.complycube.com) or browse the [API reference](https://docs.complycube.com/api-reference) for fine-grained documentation of all our services.
+- Call `ComplyCube.startSafe` from user interaction (button press) after app UI is active, not during early app initialization.
 
-## About ComplyCube
+## Integration Docs
 
-[ComplyCube](https://www.complycube.com/en) stands out as an award-winning SaaS & API platform, specializing in cutting-edge Identity Verification (IDV), Anti-Money Laundering (AML), and Know Your Customer (KYC) compliance solutions. It caters to a wide customer base across financial services, transport, healthcare, e-commerce, cryptocurrency, FinTech, telecoms, and more, positioning itself as a frontrunner in the IDV industry.
-<br>
-<br>
-The ISO-certified AI-powered platform is commended for its fast omnichannel integration and the breadth of its services, offering Low/No-Code solutions, comprehensive API, Mobile SDKs, Client Libraries, and effective CRM integrations.
+- Mobile SDK guide: https://docs.complycube.com/documentation/guides/mobile-sdk-guide
+- React Native SDK package: https://www.npmjs.com/package/@complycube/react-native
+- API reference: https://docs.complycube.com/api-reference
+- ComplyCube website: https://www.complycube.com

@@ -1,42 +1,102 @@
 import React from 'react';
 import { ComplyCube } from '@complycube/react-native';
-import { useEffect, useState } from 'react';
+import type { StartOptions } from '@complycube/react-native';
+import { useCallback } from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  useColorScheme,
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 
-const settings = {
-  clientID: 'CLIENT_ID',
-  clientToken: 'SDK_TOKEN',
+const id = 'CLIENT_ID';
+const token = 'SDK_TOKEN';
+
+const sdkSettings: Record<string, unknown> = {
   stages: [
     {
       name: 'intro',
-      heading: 'Custom Screen Title',
-      message: 'Custom welcome message.',
+      title: 'Welcome',
+      message: 'We will verify your identity.',
+    },
+    {
+      name: 'consent',
+      title: 'Terms of Service',
+      message: 'Accept terms',
     },
     {
       name: 'documentCapture',
+      nfcEnabled: true,
+      captureDocumentId: false,
+      showGuidance: true,
+      useLiveCaptureOnly: false,
+      useMLAssistance: true,
+      retryLimit: 3,
       documentTypes: {
         passport: true,
-        driving_license: ['GB', 'US'],
+        driving_license: ['GB', 'FR'],
+        national_identity_card: ['GB', 'FR'],
+        residence_permit: ['GB', 'FR'],
       },
     },
-    'faceCapture',
+    {
+      name: 'faceCapture',
+      mode: 'photo',
+      showGuidance: true,
+      useLiveCaptureOnly: false,
+      useMLAssistance: true,
+      retryLimit: 1,
+    },
+    // {
+    //   name: 'faceCapture',
+    //   mode: 'video',
+    //   showGuidance: true,
+    //   useLiveCaptureOnly: false,
+    //   useMLAssistance: true,
+    //   retryLimit: 1,
+    // },
+    {
+      name: 'poaCapture',
+      showGuidance: true,
+      useLiveCaptureOnly: false,
+      useMLAssistance: true,
+      retryLimit: 3,
+      isAddressCaptureEnabled: true,
+      documentTypes: {
+        bank_statement: true,
+        utility_bill: ['GB', 'FR'],
+      },
+    },
+    {
+      name: 'addressCapture',
+      allowedCountries: ['GB', 'FR'],
+      useAutoComplete: true,
+    },
+    {
+      name: 'complete',
+      title: 'Complete',
+      message: 'Verification finished.',
+    },
   ],
 };
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-  const [showSDK, setShowSDK] = useState(false);
+  const startVerification = useCallback(async () => {
+    const out = await ComplyCube.startSafe(
+      {
+        stages: [],
+        ...sdkSettings,
+        clientID: id,
+        clientToken: token,
+      } as StartOptions,
+    );
 
-  useEffect(() => {
-    // Initialization logic (if needed)
+    if (__DEV__) {
+      // Keeps the example behavior visible while testing.
+      console.log('ComplyCube outcome:', out);
+    }
   }, []);
 
   return (
@@ -44,23 +104,9 @@ function App() {
       <StatusBar />
       <View style={styles.container}>
         <Text style={styles.header}>Identity Verification</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setShowSDK(true)}
-        >
+        <TouchableOpacity style={styles.button} onPress={startVerification}>
           <Text style={styles.buttonText}>Start Verification</Text>
         </TouchableOpacity>
-
-        {showSDK && (
-          <View style={styles.sdkContainer}>
-            <ComplyCube
-              settings={settings}
-              onSuccess={() => setShowSDK(false)}
-              onError={() => setShowSDK(false)}
-              onCancel={() => setShowSDK(false)}
-            />
-          </View>
-        )}
       </View>
     </SafeAreaView>
   );
@@ -96,11 +142,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '500',
-  },
-  sdkContainer: {
-    flex: 1,
-    marginTop: 20,
-    backgroundColor: 'white',
   },
 });
 
