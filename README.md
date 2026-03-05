@@ -182,7 +182,7 @@ pod install
 cd ..
 ```
 
-### Android: `No activity available`
+For detailed instructions on integrating our SDK, please refer to our [integration guide](ttps://docs.complycube.com/sdks/mobile-integrations/react-native-sdk).
 
 - Call `ComplyCube.startSafe` from user interaction (button press) after app UI is active, not during early app initialization.
 
