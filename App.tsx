@@ -23,8 +23,6 @@ const sdkSettings: Record<string, unknown> = {
     },
     {
       name: 'consent',
-      title: 'Terms of Service',
-      message: 'Accept terms',
     },
     {
       name: 'documentCapture',
