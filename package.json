@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@complycube/react-native": "^1.2.0",
+    "@complycube/react-native": "^1.2.4",
     "@sentry/react-native": "^6.10.0",
     "react": "19.0.0",
     "react-native": "0.79.1"
